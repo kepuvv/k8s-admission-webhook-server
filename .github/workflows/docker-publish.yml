@@ -26,6 +26,6 @@ jobs:
           push: true
           tags: |
             ${{ secrets.DOCKERHUB_USERNAME }}/kube-admission-webhook-server:latest
-            ${{ secrets.DOCKERHUB_USERNAME }}/kube-admission-webhook-server:${{ github.sha }}
+            ${{ secrets.DOCKERHUB_USERNAME }}/kube-admission-webhook-server:${{ github.short-sha }}
           cache-from: type=registry,ref=${{ secrets.DOCKERHUB_USERNAME }}/kube-admission-webhook-server:latest
           cache-to: type=inline
