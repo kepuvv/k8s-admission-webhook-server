@@ -2,9 +2,12 @@
 
 Small Flask-based Kubernetes admission webhook example that provides a mutate and validate endpoint for Pods.
 
+Kubernetes documentation: [Dynamic Admission Control](https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers)
+
 Quick start
 
 - Run latest version from Docker Hub:
+
   `docker run -d -p 5001:5001 kepuvv/kube-admission-webhook-server:latest`
 
 Local build:
@@ -25,8 +28,6 @@ Local build:
     -d '{"request": {"uid": "1234", "object": {"metadata": {"name": "test-pod"}, "spec": {"containers": [{"name": "app", "image": "nginx", "resources": {"requests": {"cpu": "100m","memory": "128Mi"},"limits": {"cpu": "200m","memory": "256Mi"}}}]}}}}'
   ```
 
-Requirements
+Requirements:
 
 - Python 3.12
-
-Kubernetes documentation: [Dynamic Admission Control](https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers)
