@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - main
+env:
+  SHORT_SHA: ${{ github.sha }}
 
 jobs:
   build-and-push:
@@ -26,6 +28,6 @@ jobs:
           push: true
           tags: |
             ${{ secrets.DOCKERHUB_USERNAME }}/kube-admission-webhook-server:latest
-            ${{ secrets.DOCKERHUB_USERNAME }}/kube-admission-webhook-server:${{ github.short-sha }}
+            ${{ secrets.DOCKERHUB_USERNAME }}/kube-admission-webhook-server:${SHORT_SHA:0:7}
           cache-from: type=registry,ref=${{ secrets.DOCKERHUB_USERNAME }}/kube-admission-webhook-server:latest
           cache-to: type=inline
