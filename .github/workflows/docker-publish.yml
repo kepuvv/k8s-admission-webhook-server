@@ -19,11 +19,8 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Create short commit sha
-        run: |
-          github_sha_hash=${{ github.sha }}
-          github_sha_short="${github_sha_hash:0:7}"
-          echo "github_sha_short: ${github_sha_hash:0:7}"
+      - name: Set short SHA
+        run: echo "SHORT_SHA=${GITHUB_SHA::7}" >> $GITHUB_ENV
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
@@ -32,6 +29,6 @@ jobs:
           push: true
           tags: |
             ${{ secrets.DOCKERHUB_USERNAME }}/kube-admission-webhook-server:latest
-            ${{ secrets.DOCKERHUB_USERNAME }}/kube-admission-webhook-server:${github_sha_short}
+            ${{ secrets.DOCKERHUB_USERNAME }}/kube-admission-webhook-server:${{ env.SHORT_SHA }}
           cache-from: type=registry,ref=${{ secrets.DOCKERHUB_USERNAME }}/kube-admission-webhook-server:latest
           cache-to: type=inline
