@@ -49,12 +49,12 @@ def validate():
     pod = request_info['request']['object']
     uid = request_info['request']['uid']
 
-    isAllowed = False if pod.get('spec', {}).get('containers', []) else True
+    is_allowed = False if pod.get('spec', {}).get('containers', []) else True
     reason = "All containers must have resource requests and limits defined."
 
     for container in pod.get('spec', {}).get('containers', []):
         if container.get('resources', {}).get('requests') and container.get('resources', {}).get('limits'):
-            isAllowed = True
+            is_allowed = True
             break
 
     admission_response = {
@@ -62,11 +62,11 @@ def validate():
         "kind": "AdmissionReview",
         "response": {
             "uid": uid,
-            "allowed": isAllowed
+            "allowed": is_allowed
         }
     }
 
-    if not isAllowed:
+    if not is_allowed:
         admission_response["response"]["status"] = {
             "code": 403,
             "message": reason
