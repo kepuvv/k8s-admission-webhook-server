@@ -53,8 +53,8 @@ jobs:
           context: .
           push: true
           tags: |
-            ${{ secrets.DOCKERHUB_USERNAME }}/kube-admission-webhook-server:latest
             ${{ secrets.DOCKERHUB_USERNAME }}/kube-admission-webhook-server:${{ env.SHORT_SHA }}
+            ${{ secrets.DOCKERHUB_USERNAME }}/kube-admission-webhook-server:latest
             ghcr.io/${{ secrets.DOCKERHUB_USERNAME }}/kube-admission-webhook-server:latest
             ghcr.io/${{ secrets.DOCKERHUB_USERNAME }}/kube-admission-webhook-server:${{ env.SHORT_SHA }}
           cache-from: type=registry,ref=${{ secrets.DOCKERHUB_USERNAME }}/kube-admission-webhook-server:latest
