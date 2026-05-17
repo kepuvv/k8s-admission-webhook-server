@@ -10,6 +10,10 @@ Quick start
 
   `docker run -d -p 5001:5001 kepuvv/kube-admission-webhook-server:latest`
 
+- Or you can use ghcr.io instaed of Docker Hub:
+  
+  `docker pull ghcr.io/kepuvv/kube-admission-webhook-server:latest`
+
 Local build:
 
 - Build:
