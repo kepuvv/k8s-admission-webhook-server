@@ -23,6 +23,10 @@ jobs:
 
     needs: test-py-script
 
+    permissions:
+      contents: read
+      packages: write
+
     steps:
       - uses: actions/checkout@v6
 
